@@ -1,0 +1,202 @@
+openapi: 3.0.0
+info:
+  title: Sensor API
+  description: API for managing sensor data
+  version: 1.0.0
+paths:
+  /group/{groupName}/transparency/average:
+    get:
+      summary: Get current average transparency inside the group
+      parameters:
+        - name: groupName
+          in: path
+          required: true
+          description: The name of the sensor group
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: { group: "exampleGroup", averageTransparency: 75.5 }
+
+  /group/{groupName}/temperature/average:
+    get:
+      summary: Get current average temperature inside the group
+      parameters:
+        - name: groupName
+          in: path
+          required: true
+          description: The name of the sensor group
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: { group: "exampleGroup", averageTemperature: 25.5 }
+
+  /group/{groupName}/species:
+    get:
+      summary: Get full list of species with counts currently detected inside the group
+      parameters:
+        - name: groupName
+          in: path
+          required: true
+          description: The name of the sensor group
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: { group: "alpha", speciesList: {"Atlantic Cod": 162206,"Barracuda": 162253,"Sailfish": 161419}}
+
+  /group/{groupName}/species/top/{N}:
+    get:
+      summary: Get list of top N species with counts currently detected inside the group
+      parameters:
+        - name: groupName
+          in: path
+          required: true
+          description: The name of the sensor group
+          schema:
+            type: string
+        - name: N
+          in: path
+          required: true
+          description: The number of top species to retrieve
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: { group: "alpha", speciesList: {"Atlantic Cod": 162206,"Barracuda": 162253,"Sailfish": 161419}}
+
+  /region/temperature/min:
+    get:
+      summary: Get current minimum temperature inside the region
+      parameters:
+        - name: xMin
+          in: query
+          required: true
+          description: Minimum X coordinate
+          schema:
+            type: number
+        - name: xMax
+          in: query
+          required: true
+          description: Maximum X coordinate
+          schema:
+            type: number
+        - name: yMin
+          in: query
+          required: true
+          description: Minimum Y coordinate
+          schema:
+            type: number
+        - name: yMax
+          in: query
+          required: true
+          description: Maximum Y coordinate
+          schema:
+            type: number
+        - name: zMin
+          in: query
+          required: true
+          description: Minimum Z coordinate
+          schema:
+            type: number
+        - name: zMax
+          in: query
+          required: true
+          description: Maximum Z coordinate
+          schema:
+            type: number
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: { "Min Temperature": 20.0 }
+
+  /region/temperature/max:
+    get:
+      summary: Get current maximum temperature inside the region
+      parameters:
+        - name: xMin
+          in: query
+          required: true
+          description: Minimum X coordinate
+          schema:
+            type: number
+        - name: xMax
+          in: query
+          required: true
+          description: Maximum X coordinate
+          schema:
+            type: number
+        - name: yMin
+          in: query
+          required: true
+          description: Minimum Y coordinate
+          schema:
+            type: number
+        - name: yMax
+          in: query
+          required: true
+          description: Maximum Y coordinate
+          schema:
+            type: number
+        - name: zMin
+          in: query
+          required: true
+          description: Minimum Z coordinate
+          schema:
+            type: number
+        - name: zMax
+          in: query
+          required: true
+          description: Maximum Z coordinate
+          schema:
+            type: number
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: { "Max Temperature": 30.0 }
+
+  /sensor/{codeName}/temperature/average:
+    get:
+      summary: Get average temperature detected by a particular sensor between specified date/time pairs
+      parameters:
+        - name: codeName
+          in: path
+          required: true
+          description: The codename of the sensor
+          schema:
+            type: string
+        - name: from
+          in: query
+          required: true
+          description: Start date/time (UNIX timestamp)
+          schema:
+            type: integer
+        - name: till
+          in: query
+          required: true
+          description: End date/time (UNIX timestamp)
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example: { sensor: "exampleSensor", averageTemperature: 28.0 }
