@@ -4,8 +4,7 @@ Follow these steps to get your project up and running.
 
 ### 1. Clone the Repository
 
-git clone https://github.com/your-username/your-project.git
-cd your-project
+https://github.com/jhalaneelam/citypeoplesolutions_test_project.git
 
 # Steps to run the PostgreSQL and Redis
 docker network create go_docker_compose
